@@ -3,7 +3,9 @@
 void StrizhSat::init() {
   bmpStatus = bmp.begin();
   rtc.begin();
-  rtc.period(5);
+  rtc.period(1);
+  pinMode(D4, OUTPUT);
+  pinMode(D0, OUTPUT);
   tempStatus = temp.online();
   #ifdef PCF_ENABLE 
   pcf.begin();
@@ -64,14 +66,13 @@ uint8_t StrizhSat::getTimeHours() {
 float StrizhSat::getTemperature() {
   return curTemp;
 }
-/*void StrizhSat::ATWrite(uint32_t address, uint8_t* data, uint32_t length) {
-  mem.write(address, data, length);
-}
-void StrizhSat::ATRead(uint32_t address, uint8_t* data, uint32_t length) {
-  mem.read(address, data, length);
-}*/
-
 void StrizhSat::ATClear() {
   for(uint32_t i = 0; i < 16384; i++)
     mem.write(i, (byte)0);
+}
+void StrizhSat::load1(uint8_t value) {
+  digitalWrite(D4, value);
+}
+void StrizhSat::load2(uint8_t value) {
+  digitalWrite(D0, value);
 }

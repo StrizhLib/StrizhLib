@@ -40,6 +40,8 @@ class StrizhSat {
     template <typename T>
     void ATRead(uint32_t address, T& data) { mem.read(address, (byte*)&data, sizeof(T)); }
     void ATClear();
+    void load1(uint8_t value);
+    void load2(uint8_t value);
     #ifdef PCF_ENABLE
     bool readKey1() { return pcf.digitalRead(0); }
     bool readKey2() { return pcf.digitalRead(1); }
