@@ -1,30 +1,30 @@
 #include <Arduino.h>
 #include <StrizhSat.h>
 
-StrizhSat strizh;
-uint32_t timer = 0;
+StrizhSat sat; // создаем обьект библиотеки
+uint32_t timer = 0; 
 
 void setup() {
-  strizh.init();
+  sat.init(); // инициализируем датчики спутника
   Serial.begin(9600);
 }
 void loop() {
-  strizh.tick();
-  if(millis() - timer > 2000) {
+  sat.tick(); // обрабатываем значения с датчиков
+  if(millis() - timer > 2000) { // каждые 2 секунды выводим значения
     Serial.print("Time: ");
-    Serial.print(strizh.getTime()->Hours);
+    Serial.print(sat.getTimeHours());
     Serial.print(":");
-    Serial.print(strizh.getTime()->minutes);
+    Serial.print(sat.getTimeMinutes());
     Serial.print(":");
-    Serial.println(strizh.getTime()->seconds);
+    Serial.println(sat.getTimeSeconds());
     Serial.print("Temperature: ");
-    Serial.println(strizh.getTemperature());
+    Serial.println(sat.getTemperature());
     Serial.print("Pressure: ");
-    Serial.println(strizh.getPressure());
+    Serial.println(sat.getPressure());
     Serial.print("Altitude: ");
-    Serial.println(strizh.getAltitude());
+    Serial.println(sat.getAltitude());
     Serial.print("BMP temperature: ");
-    Serial.println(strizh.getBmpTemperature());
+    Serial.println(sat.getBmpTemperature());
     Serial.println("");
     timer = millis();
   } 

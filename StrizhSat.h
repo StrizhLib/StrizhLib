@@ -4,9 +4,9 @@
 #include "microDS18B20.h"
 #include "BMP180.h"
 #include <Wire.h>
-#include <AT24CX.h>
+#include "AT24CX.h"
 #ifdef PCF_ENABLE 
-#include <PCF8574.h>
+#include "PCF8574.h"
 #endif
 
 class StrizhSat {
@@ -33,12 +33,12 @@ class StrizhSat {
     uint8_t getTimeSeconds();
     uint8_t getTimeMinutes();
     uint8_t getTimeHours();
-    void ATWrite(uint32_t address, uint8_t* data, uint32_t length);
-    void ATRead(uint32_t address, uint8_t* data, uint32_t length);
+    //void ATWrite(uint32_t address, uint8_t* data, uint32_t length);
+    //void ATRead(uint32_t address, uint8_t* data, uint32_t length);
     template <typename T>
-    void ATWrite(uint32_t address, T data);
+    void ATWrite(uint32_t address, T data) { mem.write(address, (byte*)&data, sizeof(T)); }
     template <typename T>
-    void ATRead(uint32_t address, T data);
+    void ATRead(uint32_t address, T& data) { mem.read(address, (byte*)&data, sizeof(T)); }
     void ATClear();
     #ifdef PCF_ENABLE
     bool readKey1() { return pcf.digitalRead(0); }
