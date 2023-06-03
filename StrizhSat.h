@@ -45,8 +45,8 @@ class StrizhSat {
     #ifdef PCF_ENABLE
     bool readKey1() { return pcf.digitalRead(0); }
     bool readKey2() { return pcf.digitalRead(1); }
-    void setLed1(bool value) { pcf.digitalWrite(2, value); }
-    void setLed2(bool value) { pcf.digitalWrite(3, value); }
+    void setLed1(uint8_t value) { pcf.digitalWrite(2, value); }
+    void setLed2(uint8_t value) { pcf.digitalWrite(3, value); }
     void PCFDigitialWrite(uint8_t pin, uint8_t value) { pcf.digitalWrite(pin, value); }
     bool PCFDigitialRead(uint8_t pin) { return pcf.digitalRead(pin); }
     void PCFPinMode(uint8_t pin, uint8_t mode) { return pcf.pinMode(pin, mode); }
